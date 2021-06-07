@@ -39,12 +39,12 @@ object internal extends Logging {
       cluster: String,
       owner: String): SACAtlasEntityWithDependencies = {
     val dbEntity = new AtlasEntity(metadata.DB_TYPE_STRING)
-
+    logWarn("pasa por sparkDbToEntity ")
     dbEntity.setAttribute(
       "qualifiedName", sparkDbUniqueAttribute(dbDefinition.name))
     dbEntity.setAttribute(AtlasConstants.CLUSTER_NAME_ATTRIBUTE, cluster)
     dbEntity.setAttribute("name", dbDefinition.name)
-    dbEntity.setAttribute("description", dbDefinition.description)
+    // dbEntity.setAttribute("description", dbDefinition.description)
     dbEntity.setAttribute("location", dbDefinition.locationUri.toString)
     dbEntity.setAttribute("parameters", dbDefinition.properties.asJava)
     dbEntity.setAttribute("owner", owner)
@@ -189,9 +189,10 @@ object internal extends Logging {
       case "Spark shell" => s"Spark Job + $appId"
       case default => default + s" $appId"
     }
-    entity.setAttribute("qualifiedName", appId)
+    entity.setAttribute("qualifiedName", "PRUEBA_ISABEL_audits")
     entity.setAttribute("name", appName)
     entity.setAttribute("currUser", SparkUtils.currUser())
+    //entity.setAttribute("description", "HOLA") ##funciona
 
     val inputObjIds = inputs.map(_.asObjectId).asJava
     val outputObjIds = outputs.map(_.asObjectId).asJava

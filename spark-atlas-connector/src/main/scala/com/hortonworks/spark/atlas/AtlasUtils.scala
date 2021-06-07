@@ -46,6 +46,7 @@ object AtlasUtils extends Logging {
       logWarn("Spark Atlas Connector is disabled.")
       false
     } else {
+      logWarn("Spark Atlas Connector is enabled.")
       true
     }
   }

@@ -20,6 +20,7 @@ package com.hortonworks.spark.atlas.sql.testhelper
 import com.hortonworks.spark.atlas.sql.QueryDetail
 import org.apache.spark.sql.execution.QueryExecution
 import org.apache.spark.sql.util.QueryExecutionListener
+import com.hortonworks.spark.atlas.utils.Logging
 
 import scala.collection.mutable
 
@@ -32,6 +33,8 @@ class AtlasQueryExecutionListener extends QueryExecutionListener {
       return
     }
     queryDetails += QueryDetail.fromQueryExecutionListener(qe, durationNs)
+    println("sAtlasQueryExecutionListener")
+    println(queryDetails)
   }
 
   override def onFailure(funcName: String, qe: QueryExecution, exception: Exception): Unit = {

@@ -84,7 +84,10 @@ trait AtlasEntityUtils extends Logging {
   }
 
   def processType: String = metadata.PROCESS_TYPE_STRING
-
+  // println("pasa por aqui prueba 2")
+  // println(metadata.PROCESS_TYPE_STRING)
+  logWarn("pasa por processType")
+  logWarn(metadata.PROCESS_TYPE_STRING)
   def processUniqueAttribute(executionId: Long): String =
     internal.sparkProcessUniqueAttribute(executionId)
 

@@ -64,6 +64,8 @@ class SparkAtlasEventTracker(atlasClient: AtlasClient, atlasClientConf: AtlasCli
       case e: SparkListenerEvent if e.getClass.getName.contains("org.apache.spark.ml") =>
         mlEventTracker.pushEvent(e)
       case _ => // Ignore other events
+      logWarn("onOtherEvent")
+      logWarn(event)
     }
   }
 
@@ -75,10 +77,18 @@ class SparkAtlasEventTracker(atlasClient: AtlasClient, atlasClientConf: AtlasCli
 
     if (qe.logical.isStreaming) {
       // streaming query will be tracked via SparkAtlasStreamingQueryEventTracker
+        logWarn(s"SHAPES trying to print something Isabel qe.logical.isStreaming")
+        logWarn(qe.logical.isStreaming)
       return
     }
 
     val qd = QueryDetail.fromQueryExecutionListener(qe, durationNs)
+    logWarn(s"SHAPES trying to print something Isabel")
+    logWarn(qd)
+    logWarn(qd.getClass)
+    logWarn(qd.qe)    
+    logWarn("executedPlan") 
+    logWarn(qd.qe.executedPlan)
     executionPlanTracker.pushEvent(qd)
   }
 

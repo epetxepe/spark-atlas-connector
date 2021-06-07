@@ -93,6 +93,7 @@ class SparkExecutionPlanProcessor(
             // Case 1. LOAD DATA LOCAL INPATH (from local)
             // Case 2. LOAD DATA INPATH (from HDFS)
             logDebug(s"LOAD DATA [LOCAL] INPATH (${c.path}) ${c.table}")
+            logWarn("LoadDataCommand")
             CommandsHarvester.LoadDataHarvester.harvest(c, qd)
 
           case c: CreateViewCommand =>
@@ -105,6 +106,7 @@ class SparkExecutionPlanProcessor(
 
           case c: SaveIntoDataSourceCommand =>
             logDebug(s"DATA FRAME SAVE INTO DATA SOURCE: ${qd.qe}")
+            logWarn(s"ISABEL DATA FRAME SAVE INTO DATA SOURCE: ${qd.qe}")
             CommandsHarvester.SaveIntoDataSourceHarvester.harvest(c, qd)
 
           case c: CreateTableCommand =>

@@ -209,9 +209,13 @@ object CommandsHarvester extends AtlasEntityUtils with Logging {
   }
 
   private def getPlanInfo(qd: QueryDetail): Map[String, String] = {
+    val sparkPlan = qd.qe.sparkPlan.toString()
+    val res =if (sparkPlan.contains("Delta")) "Delta" else "No Delta"
     Map("executionId" -> qd.executionId.toString,
       "remoteUser" -> SparkUtils.currSessionUser(qd.qe),
       "details" -> qd.qe.toString(),
+      "campo_prueba" -> res,
+      // "description" -> qd.qe.toString(),
       "sparkPlanDescription" -> qd.qe.sparkPlan.toString())
   }
 

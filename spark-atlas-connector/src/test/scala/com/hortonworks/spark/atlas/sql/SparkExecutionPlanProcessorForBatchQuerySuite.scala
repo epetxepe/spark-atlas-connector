@@ -418,10 +418,16 @@ class SparkExecutionPlanProcessorForBatchQuerySuite
   }
 
   private def assertProcessEntity(entity: AtlasEntity, queryDetail: QueryDetail): Unit = {
+    // val sparkPlan = queryDetail.qe.toString() //without sparkplan
+    // println(sparkPlan)
+    // val res =if (sparkPlan.contains("Delta")) "Delta" else "No Delta"
+    // println(res)
     val expectedMap = Map(
       "executionId" -> queryDetail.executionId.toString,
-      "remoteUser" -> SparkUtils.currSessionUser(queryDetail.qe),
-      "details" -> queryDetail.qe.toString()
+      "remoteUser" -> SparkUtils.currSessionUser(queryDetail.qe)
+      // "queryPlan" -> queryDetail.qe.toString(),
+      // "details" -> queryDetail.qe.toString(),
+      // "description" -> "prueba"
     )
 
     expectedMap.foreach { case (key, value) =>
