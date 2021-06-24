@@ -77,13 +77,20 @@ class SparkAtlasEventTracker(atlasClient: AtlasClient, atlasClientConf: AtlasCli
 
     if (qe.logical.isStreaming) {
       // streaming query will be tracked via SparkAtlasStreamingQueryEventTracker
-        logWarn(s"SHAPES trying to print something Isabel qe.logical.isStreaming")
+        logWarn(s"SHAPES trying to print something Isabel qe.logical.isStreaming")       
         logWarn(qe.logical.isStreaming)
       return
     }
 
     val qd = QueryDetail.fromQueryExecutionListener(qe, durationNs)
     logWarn(s"SHAPES trying to print something Isabel")
+    import org.apache.spark.sql.SparkSession
+    val spark = SparkSession
+      .builder()
+      .appName("Spark SQL basic example")          
+      .getOrCreate()
+    val data = spark.range(5, 10)
+    data.write.format("delta").mode("overwrite").save("/tmp/delta-desde-SAC")   
     logWarn(qd)
     logWarn(qd.getClass)
     logWarn(qd.qe)    
