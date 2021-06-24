@@ -106,10 +106,10 @@
                   <pattern>javax.ws.rs</pattern>
                   <shadedPattern>com.hortonworks.spark.atlas.javax.ws.rs</shadedPattern>
                 </relocation>
-                <relocation>
+                <!-- <relocation>
                   <pattern>com.fasterxml.jackson</pattern>
                   <shadedPattern>com.hortonworks.spark.atlas.com.fasterxml.jackson</shadedPattern>
-                </relocation>
+                </relocation> -->
 
               </relocations>
             </configuration>
